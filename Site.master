@@ -1,0 +1,174 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %>Ankita Beauty Parlor</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+
+        .carousel img{
+            height:90vh;
+            width:100%;
+        }
+
+        .carousel h1{
+            margin-top:100px;
+            margin-left:15%;
+            position:absolute;
+            z-index:99;
+            color:black;
+            font-size:5.5em;
+            background:snow;
+            padding:15px;
+            border-radius:10px;
+            opacity:0.8;
+            font-family:'Colonna MT';
+        }
+        .ssctable td{
+            border:1px solid black;
+            font-size:1.5em;
+        }
+
+        .mygridview{
+            font-size:x-large;
+        }
+
+        marquee h2{
+            color:red;
+            font-family:'Lucida Sans';
+            font-size:3em;
+        }    
+        @media(max-width:768px){
+         
+        .carousel img{
+            height:100px;
+            width:100%;
+            }
+        
+        
+        .carousel h1{
+            margin-top:10px;
+            margin-left:15%;
+            position:absolute;
+            z-index:99;
+            color:black;
+            font-size:1.5em;
+            background:snow;
+            padding:5px;
+            border-radius:10px;
+            opacity:0.8;
+            font-family:'Colonna MT';
+        } 
+        
+        marquee h2{
+            color:red;
+            font-family:'Lucida Sans';
+            font-size:1em;
+        }
+        .mycontainer{
+            font-size:0.8em;
+        }
+        .mycontainer h1{
+            font-size:1.5em;
+            font-family:Elephant;
+        }
+           .ssctable td{
+            font-size:.8em;
+            }
+
+         
+            .mygridview{
+                font-size:small;
+        }  
+        }
+    </style>
+
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">Ankita Beauty Parlor</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/About">About</a></li>
+                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li class="dropdown "><a class="" data-toggle="dropdown" href="#">Services <span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+				          <li><a href="ServiceSkinCare">Skin Care</a></li>
+				          <li><a href="ServiceHairs">Hairs</a></li>
+				          <li><a href="ServiceNails">Nails</a></li>
+				        </ul>
+				      </li>
+				      
+                    </ul>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>!</a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid body-content ">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer class="text-center">
+                <p>&copy; <%: DateTime.Now.Year %> - Saurabh Dhakne [SRB] </p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
